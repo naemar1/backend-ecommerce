@@ -3,7 +3,7 @@ import { v2 as cloudinary } from "cloudinary";
 import fs from 'fs'
 import bcryptjs from "bcryptjs";
 import sendEmailFun from "../config/sendEmail.js";
-
+import mongoose from "mongoose";
 import jwt from 'jsonwebtoken'
 import VerificationEmail from './../utils/verifyEmailTemplate.js';
 import generatedAccessToken from "../utils/generatedAccessToken.js";
@@ -793,7 +793,8 @@ export const googleAuthController = async (req, res) => {
 
 export async function deleteMultiple(req, res) {
     try {
-        const ids = req.body.data;
+        console.log(req.body)
+        const ids = req.body.data.ids;
 
         if (!Array.isArray(ids) || ids.length === 0) {
             return res.status(400).json({
@@ -802,6 +803,8 @@ export async function deleteMultiple(req, res) {
                 message: "Invalid or empty product IDs"
             });
         }
+
+        const objectIds = ids.map(id => new mongoose.Types.ObjectId(id));
 
         await UserModel.deleteMany({ _id: { $in: objectIds } });
 
