@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema(
         // Profile picture of the user
         avatar: {
             type: String,
-            default: "http://localhost:8000/images/profilephoto.jpg",
+            default: "/images/profilephoto.jpg",
         },
 
         // Mobile number (optional, but validated if provided)
