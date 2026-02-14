@@ -5,6 +5,8 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/connectDB.js";
+import path from "path";
+import { fileURLToPath } from "url";
 // Load environment variables
 dotenv.config();
 // importing routes
@@ -31,6 +33,12 @@ app.use(
     })
 );
 app.use(cookieParser());
+
+// Serve static images
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 // // Example API route
 app.get("/", (request, response) => {

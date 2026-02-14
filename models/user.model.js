@@ -37,13 +37,13 @@ const userSchema = new mongoose.Schema(
         // Profile picture of the user
         avatar: {
             type: String,
-            default: "",
+            default: "http://localhost:8000/images/profilephoto.jpg",
         },
 
         // Mobile number (optional, but validated if provided)
         mobile: {
             type: String,
-            default: null,
+            default: "",
             match: [/^\+91\d{10}$/, "Invalid mobile number"], // Indian 10-digit validation
         },
 
